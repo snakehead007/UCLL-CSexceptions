@@ -5,17 +5,21 @@ namespace exceptions
     public class Smartphone
     {
         private int connectieSnelheid;
+
+        public Smartphone(int connectieSnelheid, string model)
+        {
+            this.connectieSnelheid = connectieSnelheid;
+            Model = model;
+        }
+
         public int ConnectieSnelheid
         {
-            get { return connectieSnelheid; }
+            get => connectieSnelheid;
             set
             {
                 try
                 {
-                    if (value < 0)
-                    {
-                        throw new ConnectieSnelheidException("ConnectieSnelheid negatief");
-                    }
+                    if (value < 0) throw new ConnectieSnelheidException("ConnectieSnelheid negatief");
                     connectieSnelheid = value;
                 }
                 catch (ConnectieSnelheidException err)
@@ -24,18 +28,9 @@ namespace exceptions
                 }
             }
         }
-        private string model;
-        public string Model
-        {
-            get { return model; }
-            set { model = value; }
-        }
 
-        public Smartphone(int connectieSnelheid, string model)
-        {
-            this.connectieSnelheid = connectieSnelheid;
-            this.model = model;
-        }
+        public string Model { get; set; }
+
         public bool Verbind(int connectieSnelheid)
         {
             return this.connectieSnelheid >= connectieSnelheid;
@@ -43,7 +38,7 @@ namespace exceptions
 
         public string GeefOmschrijving()
         {
-            return "Smartphone " + model + " / Connectie snelh.: " + connectieSnelheid;
+            return "Smartphone " + Model + " / Connectie snelh.: " + connectieSnelheid;
         }
     }
 }
